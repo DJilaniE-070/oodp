@@ -2,9 +2,9 @@
 
 public class Item
 {
-    int ID;
-    string Name;
-    string NamePlural;
+    public int ID;
+    public string Name;
+    public string NamePlural;
     
     public Item(int id, string nameSingular, string namePlural)
     {
