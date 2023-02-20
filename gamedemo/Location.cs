@@ -1,9 +1,5 @@
 ﻿public class Location{
-
-    // public static void Main(){
-
-    //     Location.Locationss();
-    // }
+    public string CurrentLocation;
     public int ID;
     public string? Name;
     public string? Description;
@@ -11,7 +7,7 @@
     public Location? LocationToEast;
     public Location? LocationToSouth;
     public Location? LocationToWest;
-    public string CurrentLocation;
+    
 
 
     public Location(int id, string Name, string Description, string item, string Quest, string monster){
@@ -53,7 +49,6 @@
     {
 
     CurrentLocation = "Home";
-    // List<> hoi = World.Locations;
     var home = World.Locations[0];
     var townSquare = World.Locations[1];
     LocationToNorth = townSquare;
@@ -62,7 +57,6 @@
     Console.WriteLine("You are at: " + home.Name + ".\n " + home.Description);
     Console.WriteLine(Compass());
 
-    // string? location = this.Name;
     Console.WriteLine("Would you like to move? y/n");
     string? answer1 = Console.ReadLine();
     if (answer1 == "y"){
@@ -78,17 +72,10 @@
         var farmhouse = World.Locations[5];
         var alchemistHut = World.Locations[3];
         var guardPost = World.Locations[2];
-
-
-        // LocationToNorth = alchemistHut;
-        // LocationToSouth = home;
-        // LocationToEast = guardPost;
-        // LocationToWest = alchemistHut;
-        
         Console.WriteLine("You are at: " + this.Name + ".\n " + this.Description);
         Console.WriteLine(Compass());
         Console.WriteLine("N/E/S/W?");
-        string answer2 = Console.ReadLine();
+        string? answer2 = Console.ReadLine();
         if (answer2	== "N"){
             alchemistHut.MoveFromAlchemistHut();
         }
@@ -113,7 +100,7 @@
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
         Console.WriteLine(Compass());
         Console.WriteLine("N/S?");
-        string answer3 = Console.ReadLine();
+        string? answer3 = Console.ReadLine();
         if (answer3 == "N"){
             alchemistsGarden.MoveFromAlchemistGarden();
         }
@@ -127,21 +114,72 @@
         CurrentLocation = "Guard Post";
         var bridge = World.Locations[7];
         var townSquare = World.Locations[1];
-        // Location bridge = new Location(7, "Bridge", "A stone bridge crosses a wide river.", null, null, null);
-        // Location townSquare = new Location(2, "Town square", "You see a fountain.", null, null, null);
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
         Console.WriteLine(Compass());
+        string? answer6 = Console.ReadLine();
+        if (answer6 == "E"){
+            bridge.MoveFromBridge();
+        }
+        else if (answer6 == "W"){
+            townSquare.MoveFromTownSquare();
+        }
     }
 
+    public void MoveFromBridge(){
+        CurrentLocation = "Bridge";
+        var guardPost = World.Locations[2];
+        var spiderField = World.Locations[8];
+        Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
+        Console.WriteLine(Compass());
+        string? answer7 = Console.ReadLine();
+        if (answer7 == "E"){
+            spiderField.MoveFromSpiderField();
+        }
+        else if (answer7 == "W"){
+            guardPost.MoveFromGuardpost();
+        }
+    }
+
+
+    public void MoveFromSpiderField(){
+        CurrentLocation = "Spider Field";
+        var bridge = World.Locations[7];
+        Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
+        Console.WriteLine(Compass());
+        string answer8 = Console.ReadLine();
+        if (answer8 == "W"){
+            bridge.MoveFromBridge();
+        }
+
+    }
 
     public void MoveFromFarmer(){
         var farmersField = World.Locations[6];
         var townSquare = World.Locations[1];
-        // Location farmersField = new Location(8, "Farmer's field", "You see rows of vegetables growing here.", null, null, null);
-        // Location townSquare = new Location(2, "Town square", "You see a fountain.", null, null, null);
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
         Console.WriteLine(Compass());
+        Console.WriteLine("W/E");
+        string? answer4 = Console.ReadLine();
+        if (answer4 == "W"){
+            farmersField.MoveFromFarmersfield();
+        }
+        if (answer4 == "E"){
+            townSquare.MoveFromTownSquare();
+        }
+
     }
+
+    public void MoveFromFarmersfield(){
+        var farmhouse = World.Locations[5];
+        Console.WriteLine("You are at: " + this.Name + "\n" + this.Description);
+        Console.WriteLine(Compass());
+        string? answer5 = Console.ReadLine();
+        if (answer5 == "E"){
+            farmhouse.MoveFromFarmer();
+        }
+
+    }
+
 
     
    public void MoveFromAlchemistGarden(){
@@ -149,7 +187,7 @@
     Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
     Console.WriteLine(Compass());
     Console.WriteLine("S");
-    string answer4 = Console.ReadLine();
+    string? answer4 = Console.ReadLine();
     if (answer4 == "S"){
         alchemistHut.MoveFromAlchemistHut();
     }
