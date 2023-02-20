@@ -2,8 +2,8 @@
 
 public class CountedItem
 {
-    Item TheItem;
-    int Quantity;
+    public Item TheItem {get; set;}
+    public int Quantity {get; set;}
     
     public CountedItem(Item item, int amount)
     {
