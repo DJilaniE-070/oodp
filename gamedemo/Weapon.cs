@@ -2,7 +2,7 @@
 
 public class Weapon
 {
-    int ID;
+    public int ID;
     string name;
     string NamePlural;
     int MinimumDamage;
