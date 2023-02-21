@@ -10,7 +10,7 @@ public class Monster
     public int RewardGold { get; set; }
     public int CuHp { get; set; }
     public int MaxHp { get; set; }
-    public CountedItemList Loot {get; set;}
+    public List<Item> Loot = new List<Item>();
 
     public Monster(int Id, string name, string pluralName, int maxDmg, int rewardXp, int rewardGold, int cuHp, int maxHp)
     {

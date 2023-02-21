@@ -9,7 +9,7 @@ public class Quest
     public int RewardGold {get; set;}
     public Item RewardItem {get; set;}
     public Weapon RewardWeapon {get; set;}
-    public CountedItemList QuestCompletionItems {get; set;}
+    public List<CountedItem> QuestCompletionItems = new List<CountedItem>();
 
     public Quest(int id, string name, string description, int rewardExperiencePoints, int rewardGold, Item rewardItem, Weapon rewardWeapon)
     {
