@@ -1,3 +1,5 @@
+using gamedemo;
+
 public class Monster
 {
     public int ID { get; set; }
@@ -8,6 +10,7 @@ public class Monster
     public int RewardGold { get; set; }
     public int CuHp { get; set; }
     public int MaxHp { get; set; }
+    public CountedItemList Loot {get; set;}
 
     public Monster(int Id, string name, string pluralName, int maxDmg, int rewardXp, int rewardGold, int cuHp, int maxHp)
     {

@@ -1,4 +1,6 @@
-﻿public class Location{
+﻿using gamedemo;
+
+public class Location{
     public string CurrentLocation;
     public int ID;
     public string? Name;
@@ -7,10 +9,12 @@
     public Location? LocationToEast;
     public Location? LocationToSouth;
     public Location? LocationToWest;
+    public Quest QuestAvailableHere;
+    public Monster MonsterLivingHere;
     
 
 
-    public Location(int id, string Name, string Description, string item, string Quest, string monster){
+    public Location(int id, string Name, string Description, Item item, Quest Quest, Monster monster){
         this.ID = id;
         this.Name = Name;
         this.Description = Description;
