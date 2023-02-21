@@ -25,7 +25,7 @@ public class Player
         Inventory.TheCountedItemList.Add(item);
     }
     
-    public void removeItemFromInventory(CountedItem item)
+    public void RemoveItemFromInventory(CountedItem item)
     {
         foreach (CountedItem ci in Inventory.TheCountedItemList)
         {
