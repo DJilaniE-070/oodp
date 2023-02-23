@@ -41,11 +41,11 @@ public static class World
 
     static World()
     {
-        PopulateLocations();
+        PopulateMonsters();
         PopulateItems();
         PopulateWeapons();
-        PopulateMonsters();
         PopulateQuests();
+        PopulateLocations();
     }
 
     public static void PopulateItems()

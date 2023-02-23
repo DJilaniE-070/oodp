@@ -3,11 +3,13 @@ using gamedemo;
 public class Player
 {
     public string Name;
-    public int CuHp { get; set; }
-    public int MaxHp { get; set; }
+    public int CuHp = 10;
+    public int MaxHp = 10;
     public int Gold { get; set; }
     public int Xp { get; set; }
     public int Level { get; set; }
+    public int Damage { get; set; }
+    public int MaxDamage = 10;
     public Weapon CurrentWeapon { get; set; }
     public CountedItemList Inventory { get; set; }
 
