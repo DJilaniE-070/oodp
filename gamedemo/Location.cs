@@ -66,8 +66,8 @@ public class Location
         Console.WriteLine(townSquare.Name);
 
         Console.WriteLine("You are at: " + home.Name + ".\n " + home.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(home);
+        showMonster(home);
         Console.WriteLine(Compass());
 
         Console.WriteLine("Would you like to move? y/n");
@@ -98,9 +98,10 @@ public class Location
         var farmhouse = World.Locations[5];
         var alchemistHut = World.Locations[3];
         var guardPost = World.Locations[2];
+        var townSquare = World.Locations[1];
         Console.WriteLine("You are at: " + this.Name + ".\n " + this.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(townSquare);
+        showMonster(townSquare);
         Console.WriteLine(Compass());
         Console.WriteLine("N/E/S/W?");
         string? answer2 = Console.ReadLine()?.ToUpper();
@@ -135,10 +136,10 @@ public class Location
         CurrentLocation = "Alchemist hut";
         var alchemistsGarden = World.Locations[4];
         var townSquare = World.Locations[1];
-
+        var alchemistHut = World.Locations[3];
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(alchemistHut);
+        showMonster(alchemistHut);
         Console.WriteLine(Compass());
         Console.WriteLine("N/S?");
         string? answer3 = Console.ReadLine()?.ToUpper();
@@ -162,9 +163,10 @@ public class Location
         CurrentLocation = "Guard Post";
         var bridge = World.Locations[7];
         var townSquare = World.Locations[1];
+        var guardPost = World.Locations[2];
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(guardPost);
+        showMonster(guardPost);
         Console.WriteLine(Compass());
         string? answer6 = Console.ReadLine()?.ToUpper();
         if (answer6 == "E")
@@ -187,9 +189,10 @@ public class Location
         CurrentLocation = "Bridge";
         var guardPost = World.Locations[2];
         var spiderField = World.Locations[8];
+        var bridge = World.Locations[7];
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(bridge);
+        showMonster(bridge);
         Console.WriteLine(Compass());
         string? answer7 = Console.ReadLine()?.ToUpper();
         if (answer7 == "E")
@@ -212,9 +215,10 @@ public class Location
     {
         CurrentLocation = "Spider Field";
         var bridge = World.Locations[7];
+        var spiderField = World.Locations[8];
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(spiderField);
+        showMonster(spiderField);
         Console.WriteLine(Compass());
         string? answer8 = Console.ReadLine()?.ToUpper();
         if (answer8 == "W")
@@ -234,8 +238,8 @@ public class Location
         var farmersField = World.Locations[6];
         var townSquare = World.Locations[1];
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(farmersField);
+        showMonster(farmersField);
         Console.WriteLine(Compass());
         Console.WriteLine("W/E");
         string? answer4 = Console.ReadLine()?.ToUpper();
@@ -260,8 +264,8 @@ public class Location
     {
         var farmhouse = World.Locations[5];
         Console.WriteLine("You are at: " + this.Name + "\n" + this.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(farmhouse);
+        showMonster(farmhouse);
         Console.WriteLine(Compass());
         string? answer5 = Console.ReadLine()?.ToUpper();
         if (answer5 == "E")
@@ -281,9 +285,10 @@ public class Location
     public void MoveFromAlchemistGarden()
     {
         var alchemistHut = World.Locations[3];
+        var alchemistsGarden = World.Locations[4];
         Console.WriteLine("You are at: " + this.Name + ".\n" + this.Description);
-        showAvailableQuests();
-        showMonster();
+        showAvailableQuests(alchemistsGarden);
+        showMonster(alchemistsGarden);
         Console.WriteLine(Compass());
         Console.WriteLine("S");
         string? answer4 = Console.ReadLine()?.ToUpper();
@@ -301,21 +306,91 @@ public class Location
 
     }
     
-    public void showAvailableQuests()
+    public void showAvailableQuests(Location location)
     {
-        if (QuestAvailableHere != null)
+        if (location.QuestAvailableHere != null)
         {
             Console.WriteLine("Available quests:");
-            Console.WriteLine(QuestAvailableHere.Name);
-            Console.WriteLine(QuestAvailableHere.Description);
+            Console.WriteLine("---Quest Title---");
+            Console.WriteLine("---" + location.QuestAvailableHere.Name + "---");
+            Console.WriteLine("---Quest Description---");
+            Console.WriteLine(location.QuestAvailableHere.Description);
+            Console.WriteLine("--------");
+            Console.WriteLine("Do you want to do the quest? Y/N");
+            string? answer = Console.ReadLine()?.ToUpper();
+            if (answer == "Y")
+            {
+                EnterQuest(location);
+            }
         }
     }
     
-    public void showMonster()
+    public void showMonster(Location location)
     {
-        if (MonsterLivingHere != null)
+        if (location.MonsterLivingHere != null)
         {
-            Console.WriteLine("You see a " + MonsterLivingHere.Name);
+            Console.WriteLine("The following monster is living here:");
+            Console.WriteLine("You see a " + location.MonsterLivingHere.Name);
+            Console.WriteLine("Do you want to fight the monster? Y/N");
+            string? answer = Console.ReadLine()?.ToUpper();
+            if (answer == "Y")
+            {
+                EnterQuest(location);
+            }
         }
+    }
+
+    public void EnterQuest(Location location)
+    {
+        Player player = SuperAdventure.ThePlayer();
+        Random random = new Random();
+        if (location.MonsterLivingHere != null)
+        {
+            Monster monster = location.MonsterLivingHere;
+            Console.WriteLine($"You see a {monster.Name}!");
+            while (monster.CuHp > 0 && player.CuHp > 0)
+            {
+                Console.WriteLine($"Player health: {player.CuHp}");
+                Console.WriteLine($"Monster health: {monster.CuHp}");
+                Console.WriteLine("Type attack to attack!");
+                string? answer = Console.ReadLine()?.ToUpper();
+                if (answer == "ATTACK")
+                {
+                    Console.WriteLine("You attack the monster!");
+                    player.Damage = random.Next(1, player.MaxDamage);
+                    monster.CuHp -= player.Damage;
+                    Console.WriteLine($"You did {player.Damage} damage!");
+                    Console.WriteLine("The monster attacks you!");
+                    player.CuHp -= 1;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option. Try again.");
+                }
+            }
+            if (player.CuHp <= 0)
+            {
+                Console.WriteLine("You died!");
+                Console.WriteLine("GAME OVER");
+                Console.WriteLine("Press any key to exit");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+            else if (monster.CuHp <= 0)
+            {
+                Console.WriteLine("You killed the monster!");
+                player.CuHp = player.MaxHp;
+                //location.MonsterLivingHere = null;
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
+            }
+        }
+        else
+        {
+            Console.WriteLine("There is no monster here!");
+            Console.WriteLine("Read the Quest description and go to the monster location!");
+        }
+        
+        
     }
 }

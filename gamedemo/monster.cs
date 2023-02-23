@@ -8,8 +8,8 @@ public class Monster
     public int MaxDmg { get; set; }
     public int RewardXp { get; set; }
     public int RewardGold { get; set; }
-    public int CuHp { get; set; }
-    public int MaxHp { get; set; }
+    public int CuHp = 5;
+    public int MaxHp = 5;
     public List<Item> Loot = new List<Item>();
 
     public Monster(int Id, string name, string pluralName, int maxDmg, int rewardXp, int rewardGold, int cuHp, int maxHp)

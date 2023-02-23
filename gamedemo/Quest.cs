@@ -10,6 +10,7 @@ public class Quest
     public Item RewardItem {get; set;}
     public Weapon RewardWeapon {get; set;}
     public List<CountedItem> QuestCompletionItems = new List<CountedItem>();
+    public Monster MonsterToDefeat {get; set;}
 
     public Quest(int id, string name, string description, int rewardExperiencePoints, int rewardGold, Item rewardItem, Weapon rewardWeapon)
     {
@@ -21,4 +22,6 @@ public class Quest
         RewardItem = rewardItem;
         RewardWeapon = rewardWeapon;
     }
+    
+    
 }
